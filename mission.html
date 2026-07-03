@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Mission | Team Harambee 2027</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ==========================================
+           ULTRA-SAFE MOBILE PATCHES (DO NOT REMOVE)
+           ========================================== */
+        html {
+            background-color: #0A0A0C; /* Prevents iOS white bounce flash */
+            -webkit-text-size-adjust: 100%; /* Prevents iOS landscape font scaling */
+        }
+        body {
+            -webkit-tap-highlight-color: transparent; /* Removes gray tap flash */
+            touch-action: manipulation; /* Removes 300ms tap delay on older mobile */
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Prevents iOS auto-zoom on focus (Must be 16px) */
+        input, select, textarea { font-size: 16px !important; } 
+
+        /* ==========================================
+           COLOR SYSTEM (Black & Yellow)
+           ========================================== */
+        :root {
+            --ink: #0F172A;
+            --ink-soft: #475569;
+            --ink-faint: #9CA3AF;
+            --bg: #F8FAFC;
+            --surface: #FFFFFF;
+            --line: #E2E8F0;
+            --brand: #1E3A8A;
+            --brand-dark: #172554;
+            --brand-soft: #DBEAFE;
+            --brand-ring: rgba(30, 58, 138, 0.18);
+            --accent: #F59E0B;
+            --accent-dark: #D97706;
+            --accent-soft: #FFFBEB;
+            --radius: 16px;
+            --radius-lg: 22px;
+            --shadow: 0 1px 2px rgba(15,23,42,0.04), 0 8px 24px rgba(15,23,42,0.06);
+            --shadow-lg: 0 20px 40px rgba(15,23,42,0.10);
+        }
+
+        body.dark {
+            --ink: #F8FAFC;
+            --ink-soft: #D1D5DB;
+            --ink-faint: #9CA3AF;
+            --bg: #0A0A0C;
+            --surface: #141416;
+            --line: #232326;
+            --brand: #F2C94C;
+            --brand-dark: #FFD86B;
+            --brand-soft: rgba(242, 201, 76, 0.10);
+            --brand-ring: rgba(242, 201, 76, 0.20);
+            --accent: #F2C94C;
+            --accent-dark: #E7BA2C;
+            --accent-soft: rgba(242, 201, 76, 0.08);
+            --shadow: 0 1px 2px rgba(0,0,0,0.22), 0 8px 24px rgba(0,0,0,0.32);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.48);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.35s ease, color 0.35s ease;
+            overflow-x: hidden;
+            position: relative;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+        .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.05; }
+
+        /* ==========================================
+           ANIMATION GROUP 1: BACKGROUND LIFE
+           ========================================== */
+        .aurora {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(700px 400px at 20% 20%, rgba(242,201,76,0.07), transparent 60%),
+                radial-gradient(600px 400px at 80% 70%, rgba(242,201,76,0.05), transparent 60%);
+            animation: auroraShift 12s ease-in-out infinite alternate;
+            z-index: 0;
+            pointer-events: none;
+        }
+        @keyframes auroraShift {
+            0%   { transform: translate(0, 0) scale(1); opacity: 0.8; }
+            100% { transform: translate(-30px, 20px) scale(1.08); opacity: 1; }
+        }
+
+        .particle {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+            animation: rise 10s linear infinite;
+        }
+        @keyframes rise {
+            0%   { transform: translateY(105vh) scale(0.5); opacity: 0; }
+            10%  { opacity: 0.5; }
+            90%  { opacity: 0.3; }
+            100% { transform: translateY(-5vh) scale(1); opacity: 0; }
+        }
+        .particle:nth-child(1) { left: 8%;  animation-delay: 0s;   animation-duration: 11s; }
+        .particle:nth-child(2) { left: 22%; animation-delay: 2s;   animation-duration: 13s; }
+        .particle:nth-child(3) { left: 38%; animation-delay: 5s;   animation-duration: 9s; }
+        .particle:nth-child(4) { left: 55%; animation-delay: 1s;   animation-duration: 12s; }
+        .particle:nth-child(5) { left: 70%; animation-delay: 4s;   animation-duration: 10s; }
+        .particle:nth-child(6) { left: 84%; animation-delay: 6s;   animation-duration: 14s; }
+        .particle:nth-child(7) { left: 93%; animation-delay: 3s;   animation-duration: 11s; }
+
+        /* ==========================================
+           NAVIGATION
+           ========================================== */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,0.95); /* Solid fallback */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px); /* Safari prefix */
+            border-bottom: 1px solid var(--line);
+        }
+        body.dark header { background: rgba(20,20,22,0.95); }
+        
+        /* Fallback for very old Androids that don't support blur */
+        @supports not ((backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px))) {
+            header { background: #FFFFFF !important; }
+            body.dark header { background: #141416 !important; }
+        }
+
+        .nav-row { display: flex; align-items: center; justify-content: space-between; height: 78px; gap: 1rem; }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand img { width: 46px; height: 46px; border-radius: 14px; object-fit: cover; border: 2px solid var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); transition: transform 0.25s ease; }
+        .brand:hover img { transform: scale(1.05); }
+        .brand span { font-family: 'Oswald', sans-serif; font-size: 1.22rem; font-weight: 700; color: var(--brand-dark); letter-spacing: -0.03em; }
+        body.dark .brand span { color: var(--brand); }
+
+        .nav-links { display: flex; align-items: center; gap: 2rem; }
+        .nav-links a { font-family: 'Oswald', sans-serif; font-size: 0.98rem; font-weight: 600; color: var(--ink-soft); padding: 12px 0; position: relative; transition: color 0.25s ease; }
+        .nav-links a:hover, .nav-links a.active { color: var(--brand); }
+        .nav-links a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: -2px; height: 3px; border-radius: 999px; background: var(--brand); transition: right 0.28s ease; }
+        .nav-links a:hover::after, .nav-links a.active::after { right: 0; }
+
+        .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+        .icon-btn { width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--brand); display: grid; place-items: center; cursor: pointer; font-size: 1.1rem; transition: all 0.22s ease; }
+        .icon-btn:hover { border-color: var(--brand); background: var(--brand-soft); transform: translateY(-2px); }
+        .hamburger { display: none; }
+
+        .mobile-panel { display: none; flex-direction: column; background: var(--surface); border-top: 1px solid var(--line); padding: 0.35rem 1.5rem 1rem; }
+        .mobile-panel.show { display: flex; }
+        .mobile-panel a { padding: 16px 0; font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; color: var(--ink-soft); border-bottom: 1px solid var(--line); min-height: 44px; display: flex; align-items: center; }
+        .mobile-panel a:last-child { border-bottom: none; }
+        .mobile-panel a.active { color: var(--brand); }
+
+        /* ==========================================
+           ANIMATION GROUP 2: HERO REVEAL
+           ========================================== */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .hero { text-align: center; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-soft);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            padding: 8px 20px;
+            border-radius: 999px;
+            margin-bottom: 2rem;
+            animation: badgePop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+        @keyframes badgePop {
+            from { opacity: 0; transform: scale(0.6); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+        .hero-badge .dot {
+            width: 7px; height: 7px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: dotBlink 1.6s ease-in-out infinite;
+        }
+        @keyframes dotBlink {
+            0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--accent); }
+            50%      { opacity: 0.3; box-shadow: none; }
+        }
+
+        .title {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.05em;
+            font-family: 'Outfit', sans-serif;
+        }
+        .title span {
+            display: inline-block;
+            opacity: 0;
+            animation: letterDrop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+        .title .gold { color: var(--accent); }
+        .title .space { width: 0.35em; }
+        .title span:nth-child(1)  { animation-delay: 0.10s; }
+        .title span:nth-child(2)  { animation-delay: 0.16s; }
+        .title span:nth-child(3)  { animation-delay: 0.22s; }
+        .title span:nth-child(4)  { animation-delay: 0.28s; }
+        .title span:nth-child(5)  { animation-delay: 0.34s; }
+        .title span:nth-child(6)  { animation-delay: 0.40s; }
+        .title span:nth-child(7)  { animation-delay: 0.46s; }
+        .title span:nth-child(8)  { animation-delay: 0.52s; }
+        .title span:nth-child(9)  { animation-delay: 0.58s; }
+        .title span:nth-child(10) { animation-delay: 0.64s; }
+        .title span:nth-child(11) { animation-delay: 0.70s; }
+        @keyframes letterDrop {
+            0%   { opacity: 0; transform: translateY(-50px) rotate(-6deg); }
+            100% { opacity: 1; transform: translateY(0) rotate(0); }
+        }
+
+        .glow-bar {
+            width: 110px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 999px;
+            margin: 2.2rem auto 0;
+            animation: breathe 3s ease-in-out infinite;
+        }
+        @keyframes breathe {
+            0%, 100% { box-shadow: 0 0 10px var(--brand-ring); transform: scaleX(1); }
+            50%      { box-shadow: 0 0 30px var(--brand-ring), 0 0 60px var(--accent-soft); transform: scaleX(1.35); }
+        }
+
+        .subtitle {
+            margin-top: 2rem;
+            color: var(--ink-soft);
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            animation: fadeIn 1s ease 0.9s both;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        .typing-dots {
+            display: inline-flex;
+            gap: 5px;
+            margin-left: 6px;
+        }
+        .typing-dots i {
+            width: 6px; height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: bounceDot 1.2s ease-in-out infinite;
+        }
+        .typing-dots i:nth-child(2) { animation-delay: 0.15s; }
+        .typing-dots i:nth-child(3) { animation-delay: 0.30s; }
+        @keyframes bounceDot {
+            0%, 100% { transform: translateY(0); opacity: 0.4; }
+            50%      { transform: translateY(-6px); opacity: 1; }
+        }
+
+        /* ==========================================
+           ANIMATION GROUP 3: AD BANNER
+           ========================================== */
+        .ad-wrap {
+            padding: 0 1.5rem 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        .ad-banner {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, var(--surface-hover), var(--surface));
+            border: 2px solid var(--accent);
+            border-radius: var(--radius-lg);
+            padding: 2rem 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px var(--brand-ring);
+            animation: bannerRise 0.9s ease 0.5s both;
+        }
+        @keyframes bannerRise {
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .ad-banner::before {
+            content: '';
+            position: absolute;
+            width: 260px; height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-soft), transparent 70%);
+            top: -100px; right: -60px;
+            animation: orbDrift 7s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+        @keyframes orbDrift {
+            from { transform: translate(0,0); }
+            to   { transform: translate(-40px, 30px); }
+        }
+
+        .ad-icon-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .ad-icon {
+            width: 60px; height: 60px;
+            border-radius: 16px;
+            background: var(--accent-soft);
+            border: 1px solid var(--accent);
+            display: grid;
+            place-items: center;
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+        .orbit-ring {
+            position: absolute;
+            inset: -8px;
+            border: 1.5px dashed var(--accent-glow);
+            border-radius: 20px;
+            animation: orbitSpin 10s linear infinite;
+        }
+        @keyframes orbitSpin {
+            to { transform: rotate(360deg); }
+        }
+        .orbit-dot {
+            position: absolute;
+            top: -5px; left: 50%;
+            width: 8px; height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .ad-text { flex: 1; position: relative; z-index: 1; }
+        .ad-text h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+        }
+        .ad-text h3 span { color: var(--accent); }
+        .ad-text p {
+            color: var(--ink-soft);
+            font-size: 0.9rem;
+            line-height: 1.55;
+            max-width: 420px;
+        }
+        .ad-text p b { color: var(--accent); font-weight: 700; }
+
+        .ad-cta {
+            flex-shrink: 0;
+            background: var(--accent);
+            color: #000;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 15px 28px;
+            border-radius: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px var(--brand-ring);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            z-index: 1;
+            min-height: 52px;
+        }
+        .ad-cta::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+            animation: shineSweep 3.5s ease-in-out infinite;
+        }
+        @keyframes shineSweep {
+            0%, 60% { left: -100%; }
+            80%     { left: 100%; }
+            100%    { left: 100%; }
+        }
+        .ad-cta:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 16px 35px var(--brand-ring);
+        }
+        .ad-cta i { transition: transform 0.3s ease; }
+        .ad-cta:hover i { transform: rotate(15deg) scale(1.15); }
+
+        /* ==========================================
+           FOOTER
+           ========================================== */
+        footer {
+            margin-top: auto;
+            padding: 2.2rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid var(--line);
+            color: var(--ink-faint);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            z-index: 2;
+            background: var(--surface);
+        }
+        footer .powered {
+            margin-top: 0.5rem;
+            font-weight: 700;
+            color: var(--ink-soft);
+        }
+        footer .powered a {
+            color: var(--accent);
+            font-weight: 800;
+            transition: opacity 0.25s ease;
+        }
+        footer .powered a:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+
+        /* ==========================================
+           RESPONSIVE
+           ========================================== */
+        @media (max-width: 860px) {
+            .nav-links { display: none; }
+            .hamburger { display: grid; place-items: center; }
+            .ad-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+            .ad-text p { margin: 0 auto; }
+            .ad-cta { width: 100%; justify-content: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
+</head>
+<body class="dark">
+
+    <!-- BACKGROUND LIFE -->
+    <div class="aurora"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header>
+        <div class="wrap nav-row">
+            <a href="index.html" class="brand">
+                <img src="Exeat.jpeg" alt="Team Harambee Logo">
+                <span>TEAM HARAMBEE</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="mission.html" class="active">Mission</a>
+                <a href="guide.html">Campus Guide</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
+                    <i class="fa-solid fa-sun" id="theme-icon"></i>
+                </button>
+                <button class="icon-btn hamburger" id="menu-btn" aria-label="Menu">
+                    <i class="fa-solid fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile panel drawer -->
+        <div class="mobile-panel" id="mobile-panel">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="mission.html" class="active">Mission</a>
+            <a href="guide.html">Campus Guide</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <main>
+        <div class="hero">
+            <div class="hero-badge">
+                <span class="dot"></span> Launching Soon
+            </div>
+
+            <h1 class="title" aria-label="Coming Soon">
+                <span>C</span><span>O</span><span>M</span><span>I</span><span>N</span><span class="gold">G</span><span class="space"></span><span class="gold">S</span><span>O</span><span>O</span><span>N</span>
+            </h1>
+
+            <div class="glow-bar"></div>
+
+            <p class="subtitle">
+                Stay Tuned For Updates
+                <span class="typing-dots"><i></i><i></i><i></i></span>
+            </p>
+        </div>
+    </main>
+
+    <!-- AD BANNER -->
+    <div class="ad-wrap">
+        <div class="ad-banner">
+            <div class="ad-icon-wrap">
+                <div class="ad-icon">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <div class="orbit-ring">
+                    <div class="orbit-dot"></div>
+                </div>
+            </div>
+
+            <div class="ad-text">
+                <h3>Your <span>Ad</span> Here</h3>
+                <p>Get <b>instant massive visibility</b>. Place your business banner where every user sees it, every single day.</p>
+            </div>
+
+            <a href="https://wa.me/233508934500" target="_blank" rel="noopener noreferrer" class="ad-cta">
+                <i class="fa-brands fa-whatsapp"></i> Advertise Now
+            </a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 All rights reserved.</p>
+        <p class="powered">Powered by <a href="https://paatech-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer">Paa Tech</a></p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        function on(id, event, fn) {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener(event, fn);
+        }
+
+        // Mobile Menu Drawer
+        on('menu-btn', 'click', () => {
+            const panel = document.getElementById('mobile-panel');
+            const icon = document.getElementById('menu-icon');
+            if (!panel || !icon) return;
+            panel.classList.toggle('show');
+            icon.className = panel.classList.contains('show') ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+        });
+
+        // Theme Toggle
+        function setTheme(theme) {
+            const icon = document.getElementById('theme-icon');
+            const isDark = theme === 'dark';
+            document.body.classList.toggle('dark', isDark);
+            if (icon) icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            try { localStorage.setItem('theme', theme); } catch (e) {}
+        }
+
+        let savedTheme = 'dark';
+        try { savedTheme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+        setTheme(savedTheme);
+
+        on('theme-toggle', 'click', () => {
+            setTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
+        });
+    </script>
+</body>
+</html>

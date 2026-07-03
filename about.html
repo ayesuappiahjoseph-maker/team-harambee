@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Meet Stanley Asoah Mensah | Team Harambee 2027</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ==========================================
+           ULTRA-SAFE MOBILE PATCHES (DO NOT REMOVE)
+           ========================================== */
+        html {
+            background-color: #0A0A0C; /* Prevents iOS white bounce flash */
+            -webkit-text-size-adjust: 100%; /* Prevents iOS landscape font scaling */
+        }
+        body {
+            -webkit-tap-highlight-color: transparent; /* Removes gray tap flash */
+            touch-action: manipulation; /* Removes 300ms tap delay on older mobile */
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Prevents iOS auto-zoom on focus (Must be 16px) */
+        input, select, textarea { font-size: 16px !important; } 
+
+        /* ==========================================
+           COLOR SYSTEM (Black & Yellow)
+           ========================================== */
+        :root {
+            --ink: #0F172A;
+            --ink-soft: #475569;
+            --ink-faint: #9CA3AF;
+            --bg: #F8FAFC;
+            --surface: #FFFFFF;
+            --line: #E2E8F0;
+            --brand: #1E3A8A;
+            --brand-dark: #172554;
+            --brand-soft: #DBEAFE;
+            --brand-ring: rgba(30, 58, 138, 0.18);
+            --accent: #F59E0B;
+            --accent-dark: #D97706;
+            --accent-soft: #FFFBEB;
+            --radius: 16px;
+            --radius-lg: 22px;
+            --shadow: 0 1px 2px rgba(15,23,42,0.04), 0 8px 24px rgba(15,23,42,0.06);
+            --shadow-lg: 0 20px 40px rgba(15,23,42,0.10);
+        }
+
+        body.dark {
+            --ink: #F8FAFC;
+            --ink-soft: #D1D5DB;
+            --ink-faint: #9CA3AF;
+            --bg: #0A0A0C;
+            --surface: #141416;
+            --line: #232326;
+            --brand: #F2C94C;
+            --brand-dark: #FFD86B;
+            --brand-soft: rgba(242, 201, 76, 0.10);
+            --brand-ring: rgba(242, 201, 76, 0.20);
+            --accent: #F2C94C;
+            --accent-dark: #E7BA2C;
+            --accent-soft: rgba(242, 201, 76, 0.08);
+            --shadow: 0 1px 2px rgba(0,0,0,0.22), 0 8px 24px rgba(0,0,0,0.32);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.48);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background 0.35s ease, color 0.35s ease;
+            overflow-x: hidden;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+        .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.05; }
+
+        /* ==========================================
+           NAVIGATION
+           ========================================== */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,0.95); /* Solid fallback */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px); /* Safari prefix */
+            border-bottom: 1px solid var(--line);
+        }
+        body.dark header { background: rgba(20,20,22,0.95); }
+        
+        /* Fallback for very old Androids that don't support blur */
+        @supports not ((backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px))) {
+            header { background: #FFFFFF !important; }
+            body.dark header { background: #141416 !important; }
+        }
+
+        .nav-row { display: flex; align-items: center; justify-content: space-between; height: 78px; gap: 1rem; }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand img { width: 46px; height: 46px; border-radius: 14px; object-fit: cover; border: 2px solid var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); transition: transform 0.25s ease; }
+        .brand:hover img { transform: scale(1.05); }
+        .brand span { font-family: 'Oswald', sans-serif; font-size: 1.22rem; font-weight: 700; color: var(--brand-dark); letter-spacing: -0.03em; }
+        body.dark .brand span { color: var(--brand); }
+
+        .nav-links { display: flex; align-items: center; gap: 2rem; }
+        .nav-links a { font-family: 'Oswald', sans-serif; font-size: 0.98rem; font-weight: 600; color: var(--ink-soft); padding: 12px 0; position: relative; transition: color 0.25s ease; }
+        .nav-links a:hover, .nav-links a.active { color: var(--brand); }
+        .nav-links a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: -2px; height: 3px; border-radius: 999px; background: var(--brand); transition: right 0.28s ease; }
+        .nav-links a:hover::after, .nav-links a.active::after { right: 0; }
+
+        .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+        .icon-btn { width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--brand); display: grid; place-items: center; cursor: pointer; font-size: 1.1rem; transition: all 0.22s ease; }
+        .icon-btn:hover { border-color: var(--brand); background: var(--brand-soft); transform: translateY(-2px); }
+        .hamburger { display: none; }
+
+        .mobile-panel { display: none; flex-direction: column; background: var(--surface); border-top: 1px solid var(--line); padding: 0.35rem 1.5rem 1rem; }
+        .mobile-panel.show { display: flex; }
+        .mobile-panel a { padding: 16px 0; font-weight: 700; color: var(--ink-soft); border-bottom: 1px solid var(--line); min-height: 44px; display: flex; align-items: center; }
+        .mobile-panel a:last-child { border-bottom: none; }
+        .mobile-panel a.active { color: var(--brand); }
+
+        /* ==========================================
+           HERO / ABOUT SECTION
+           ========================================== */
+        .about-hero {
+            padding: 4.5rem 0 3rem;
+            position: relative;
+            background: radial-gradient(900px 500px at 10% 20%, var(--brand-soft), transparent 60%), var(--bg);
+        }
+
+        .about-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (min-width: 1024px) {
+            .about-grid { grid-template-columns: 0.9fr 1.1fr; gap: 3rem; }
+        }
+
+        .portrait-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .portrait-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .portrait-card::before {
+            content: ''; position: absolute; inset: 0; border-radius: var(--radius-lg); padding: 2px;
+            background: linear-gradient(135deg, var(--brand), transparent 60%, var(--brand));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.5;
+        }
+
+        .portrait-frame {
+            aspect-ratio: 1 / 1; width: 100%; border-radius: 24px;
+            background: var(--bg); border: 1px solid var(--line);
+            display: grid; place-items: center; margin-bottom: 1.25rem;
+        }
+        .portrait-frame i { font-size: 4.5rem; color: var(--brand); }
+
+        .portrait-card h2 { color: var(--ink); font-size: 1.9rem; margin-bottom: 0.5rem; }
+        .role-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--brand-soft); border: 1px solid var(--brand); color: var(--brand-dark);
+            padding: 0.45rem 0.85rem; border-radius: 999px; font-size: 0.72rem; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase;
+        }
+        body.dark .role-badge { color: var(--brand); }
+
+        .bio-card { padding-top: 0.25rem; }
+        .section-kicker {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--brand-soft); border: 1px solid var(--brand); color: var(--brand-dark);
+            font-size: 0.72rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+            padding: 0.4rem 0.8rem; border-radius: 999px; margin-bottom: 1rem;
+        }
+        body.dark .section-kicker { color: var(--brand); }
+
+        .hero-title {
+            font-size: clamp(2.8rem, 5.8vw, 5rem); line-height: 0.95; letter-spacing: -1.6px; margin-bottom: 1rem; color: var(--ink);
+        }
+        .title-divider {
+            width: 92px; height: 5px; border-radius: 999px; background: var(--brand);
+            box-shadow: 0 0 12px var(--brand-ring); margin-bottom: 1.5rem;
+        }
+        .hero-copy { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.75rem; }
+
+        .stats-card {
+            background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+            padding: 1.5rem 1.5rem 1.25rem; box-shadow: var(--shadow);
+        }
+        .stat-row {
+            display: flex; justify-content: space-between; gap: 1rem; align-items: center;
+            padding: 0.95rem 0; border-bottom: 1px solid var(--line); font-size: 0.98rem;
+        }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-row span { color: var(--ink-soft); font-weight: 600; }
+        .stat-row strong { color: var(--ink); font-weight: 700; text-align: right; }
+        .stat-row strong.gold { color: var(--brand); }
+
+        /* ==========================================
+           MARKETPLACE / AD BOXES
+           ========================================== */
+        .marketplace { padding: 0 0 5rem; }
+        .market-shell { padding-top: 2rem; border-top: 1px solid var(--line); }
+        .section-heading { display: flex; flex-direction: column; gap: 0.75rem; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+        @media (min-width: 768px) { .section-heading { flex-direction: row; align-items: center; } }
+        .section-heading h3 { font-size: 1.35rem; color: var(--ink); }
+        .section-heading p { color: var(--ink-faint); font-size: 0.85rem; margin-top: 0.35rem; }
+        .section-pill {
+            display: inline-flex; align-items: center; justify-content: center; padding: 0.45rem 0.8rem;
+            border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+            color: var(--ink-soft); font-size: 0.68rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; white-space: nowrap;
+        }
+
+        .ad-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 1024px) { .ad-grid { grid-template-columns: 1fr 1fr; } }
+
+        .ad-card {
+            position: relative; overflow: hidden; background: var(--surface); border-radius: var(--radius-lg);
+            padding: 2rem; border: 1px solid var(--line); box-shadow: var(--shadow); transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .ad-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--brand); }
+        .ad-card.featured { border-color: var(--brand); box-shadow: var(--shadow-lg); }
+
+        .ad-tag {
+            display: inline-flex; align-items: center; gap: 8px; padding: 0.45rem 0.8rem; border-radius: 999px;
+            background: var(--brand-soft); border: 1px solid var(--brand); color: var(--brand-dark);
+            font-size: 0.72rem; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; margin-bottom: 1rem;
+        }
+        body.dark .ad-tag { color: var(--brand); }
+        .ad-tag.muted { background: var(--bg); color: var(--ink-soft); border-color: var(--line); }
+
+        .ad-title { font-size: clamp(1.4rem, 3vw, 2rem); color: var(--ink); margin-bottom: 0.8rem; }
+        .ad-copy { color: var(--ink-soft); font-size: 0.96rem; line-height: 1.75; max-width: 55ch; }
+
+        .ad-perks { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+        .perk {
+            display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 10px; padding: 0.55rem 0.8rem;
+            background: var(--bg); border: 1px solid var(--line); color: var(--ink); font-size: 0.82rem; font-weight: 600;
+        }
+        .perk i { color: var(--brand); }
+
+        .ad-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.6rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+        .ad-stat { display: flex; flex-direction: column; gap: 0.15rem; }
+        .ad-stat .label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-faint); font-weight: 800; }
+        .ad-stat strong { font-size: 1.9rem; line-height: 1; color: var(--ink); font-family: 'Oswald', sans-serif; }
+        .ad-stat small { font-size: 0.85rem; color: var(--ink-soft); margin-left: 4px; font-family: 'Inter', sans-serif; }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: none; cursor: pointer; text-decoration: none; transition: all 0.25s ease; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        .btn-gold { background: var(--brand); color: #111; box-shadow: 0 8px 25px var(--brand-ring); border-radius: 12px; }
+        body.dark .btn-gold { color: #000; }
+        .btn-gold:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 12px 35px var(--brand-ring); }
+        .btn-outline { background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); border-radius: 12px; }
+        .btn-outline:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-soft); transform: translateY(-3px); }
+        .ad-cta { padding: 14px 20px; min-width: 170px; border-radius: 12px; white-space: nowrap; min-height: 48px; }
+        .ad-cta i { transition: transform 0.3s ease; }
+        .ad-cta:hover i { transform: translateX(5px); }
+
+        /* ==========================================
+           FOOTER
+           ========================================== */
+        footer { margin-top: auto; padding: 2.5rem 0; text-align: center; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.8px; background: var(--surface); }
+        footer .powered { margin-top: 0.75rem; font-weight: 800; color: var(--ink-soft); }
+        footer a { color: var(--brand); text-decoration: none; transition: opacity 0.25s ease; }
+        footer a:hover { text-decoration: underline; opacity: 0.8; }
+
+        /* ==========================================
+           RESPONSIVE
+           ========================================== */
+        @media (max-width: 860px) {
+            .nav-links { display: none; }
+            .hamburger { display: grid; place-items: center; }
+            .about-hero { padding-top: 3.5rem; }
+            .hero-title { font-size: clamp(2.4rem, 10vw, 4rem); }
+            .ad-footer { align-items: stretch; }
+            .ad-cta { width: 100%; justify-content: center; }
+            .ad-stat strong { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body class="dark">
+
+    <header>
+        <div class="wrap nav-row">
+            <a href="index.html" class="brand">
+                <img src="Exeat.jpeg" alt="Team Harambee Logo">
+                <span>TEAM HARAMBEE</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="mission.html">Mission</a>
+                <a href="guide.html">Campus Guide</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
+                    <i class="fa-solid fa-sun" id="theme-icon"></i>
+                </button>
+                <button class="icon-btn hamburger" id="menu-btn" aria-label="Menu">
+                    <i class="fa-solid fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-panel" id="mobile-panel">
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About</a>
+            <a href="mission.html">Mission</a>
+            <a href="guide.html">Campus Guide</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-hero">
+            <div class="wrap about-grid">
+                <div class="portrait-card">
+                    <div class="portrait-frame">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <h2>Hon. Stanley Asoah Mensah</h2>
+                    <span class="role-badge">SRC Presidential Candidate</span>
+                </div>
+
+                <div class="bio-card">
+                    <span class="section-kicker">Biography</span>
+                    <h1 class="hero-title">Meet the Candidate</h1>
+                    <div class="title-divider"></div>
+
+                    <p class="hero-copy">
+                        Stanley Asoah Mensah is a dedicated student leader committed to redefining governance and service delivery across the UMaT campus community. Guided by accountability and transparency, his vision focuses on practical, real-world solutions for student welfare.
+                    </p>
+
+                    <div class="stats-card">
+                        <div class="stat-row">
+                            <span>Position:</span>
+                            <strong>SRC President</strong>
+                        </div>
+                        <div class="stat-row">
+                            <span>Affiliation:</span>
+                            <strong>Team Harambee</strong>
+                        </div>
+                        <div class="stat-row">
+                            <span>Core Objective:</span>
+                            <strong class="gold">Eliminate Campus Confusion</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="marketplace">
+            <div class="wrap market-shell">
+                <div class="section-heading">
+                    <div>
+                        <h3>Campus Marketplace Showcase</h3>
+                        <p>Premium digital billboard infrastructure powered by Paa Tech</p>
+                    </div>
+                    <span class="section-pill">Sponsored Ads</span>
+                </div>
+
+                <div class="ad-grid">
+                    <article class="ad-card featured">
+                        <div class="ad-tag">
+                            <i class="fa-solid fa-star"></i> Premium Spot 01
+                        </div>
+                        <h4 class="ad-title">Your Ad Here</h4>
+                        <p class="ad-copy">
+                            Want instant campus-wide visibility? Place your business flyer, banner, or service right where students search every day.
+                        </p>
+                        <div class="ad-perks">
+                            <span class="perk"><i class="fa-solid fa-bolt"></i> Instant Traffic</span>
+                            <span class="perk"><i class="fa-solid fa-crown"></i> Exclusive Slot</span>
+                            <span class="perk"><i class="fa-solid fa-chart-line"></i> High Conversion</span>
+                        </div>
+                        <div class="ad-footer">
+                            <div class="ad-stat">
+                                <span class="label">Estimated Reach</span>
+                                <strong>5,000+ <small>Daily</small></strong>
+                            </div>
+                            <a href="https://wa.me/233508934500" target="_blank" rel="noopener noreferrer" class="btn btn-gold ad-cta">
+                                <span>Book Spot</span>
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-tag muted">
+                            <i class="fa-solid fa-chart-simple"></i> Premium Spot 02
+                        </div>
+                        <h4 class="ad-title">Executive Banner Space</h4>
+                        <p class="ad-copy">
+                            High-click secondary placement slot. Perfect for catering lines, gadget distribution, clothing designers, and event promotions.
+                        </p>
+                        <div class="ad-perks">
+                            <span class="perk"><i class="fa-solid fa-eye"></i> High Visibility</span>
+                            <span class="perk"><i class="fa-solid fa-hand-pointer"></i> Great CTR</span>
+                            <span class="perk"><i class="fa-solid fa-box"></i> Flexible Promo</span>
+                        </div>
+                        <div class="ad-footer">
+                            <div class="ad-stat">
+                                <span class="label">Booking Status</span>
+                                <strong>Open <small>Now</small></strong>
+                            </div>
+                            <a href="https://wa.me/233508934500" target="_blank" rel="noopener noreferrer" class="btn btn-outline ad-cta">
+                                <span>Reserve Space</span>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 All rights reserved.</p>
+        <p class="powered">Powered by <a href="https://paatech-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer">Paa Tech</a></p>
+    </footer>
+
+    <script>
+        function on(id, event, fn) {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener(event, fn);
+        }
+
+        on('menu-btn', 'click', () => {
+            const panel = document.getElementById('mobile-panel');
+            const icon = document.getElementById('menu-icon');
+            if (!panel || !icon) return;
+            panel.classList.toggle('show');
+            icon.className = panel.classList.contains('show') ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+        });
+
+        function setTheme(theme) {
+            const icon = document.getElementById('theme-icon');
+            const isDark = theme === 'dark';
+            document.body.classList.toggle('dark', isDark);
+            if (icon) icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            try { localStorage.setItem('theme', theme); } catch (e) {}
+        }
+
+        let savedTheme = 'dark';
+        try { savedTheme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+        setTheme(savedTheme);
+
+        on('theme-toggle', 'click', () => {
+            setTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
+        });
+    </script>
+</body>
+</html>
