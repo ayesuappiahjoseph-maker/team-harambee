@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0d6efd">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="My Website">
-
-    <title>My Website</title>
-</head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Campus Guide | Team Harambee 2027</title>
@@ -563,6 +551,117 @@
             }
         }
     </style>
+    <script>
+    function on(id, event, fn) {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener(event, fn);
+    }
+
+    // Mobile menu
+    on('menu-btn', 'click', () => {
+        const panel = document.getElementById('mobile-panel');
+        const icon = document.getElementById('menu-icon');
+        if (!panel || !icon) return;
+        panel.classList.toggle('show');
+        icon.className = panel.classList.contains('show') ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    });
+
+    // Theme
+    function setTheme(theme) {
+        const icon = document.getElementById('theme-icon');
+        const isDark = theme === 'dark';
+        document.body.classList.toggle('dark', isDark);
+        if (icon) icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        try { localStorage.setItem('theme', theme); } catch (e) {}
+    }
+
+    let savedTheme = 'dark';
+    try { savedTheme = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+    setTheme(savedTheme);
+
+    on('theme-toggle', 'click', () => {
+        setTheme(document.body.classList.contains('dark') ? 'light' : 'dark');
+    });
+
+    // Search
+    on('campus-search', 'input', (e) => {
+        const term = e.target.value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.card');
+        const noResults = document.getElementById('no-results');
+        let visible = 0;
+
+        cards.forEach(card => {
+            const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+            const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
+            const tag = card.querySelector('.tag')?.textContent.toLowerCase() || '';
+            const match = title.includes(term) || desc.includes(term) || tag.includes(term);
+            card.style.display = match ? 'flex' : 'none';
+            if (match) visible++;
+        });
+
+        if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+    });
+
+    // ==================== FIXED LIVE ROUTE LOGIC ====================
+    document.querySelectorAll('.live-route-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const destination = this.dataset.destination;
+            if (!destination) return;
+
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading Route...';
+
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                         (navigator.platform === 'MacIntel' && 'ontouchend' in document);
+
+            const openMap = (url) => {
+                if (isIOS) {
+                    window.location.href = url;           // Better for native app on iOS
+                } else {
+                    window.open(url, '_blank');
+                }
+                this.innerHTML = originalText;
+            };
+
+            const encodedDest = encodeURIComponent(destination);
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+
+                        if (isIOS) {
+                            openMap(`maps://?saddr=Current%20Location&daddr=${encodedDest}&dirflg=w`);
+                        } else {
+                            const url = `https://www.google.com/maps/dir/?api=1&origin=${lat},${lng}&destination=${encodedDest}&travelmode=walking`;
+                            openMap(url);
+                        }
+                    },
+                    () => {
+                        // Location denied or failed
+                        if (isIOS) {
+                            openMap(`maps://?daddr=${encodedDest}&dirflg=w`);
+                        } else {
+                            const url = `https://www.google.com/maps/dir/?api=1&destination=${encodedDest}&travelmode=walking`;
+                            openMap(url);
+                        }
+                    },
+                    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                );
+            } else {
+                if (isIOS) {
+                    openMap(`maps://?daddr=${encodedDest}&dirflg=w`);
+                } else {
+                    const url = `https://www.google.com/maps/dir/?api=1&destination=${encodedDest}&travelmode=walking`;
+                    openMap(url);
+                }
+            }
+        });
+    });
+</script>
 </head>
 <body class="dark">
 
