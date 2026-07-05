@@ -428,7 +428,6 @@
             font-size: 0.8rem;
             transition: all 0.22s ease;
             min-height: 48px;
-            cursor: pointer;
         }
 
         body:not(.dark) .route-btn { color: #fff; }
@@ -1125,7 +1124,7 @@
             if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
         });
 
-        // Auto-route using current location & Pin Destination
+        // FIXED LIVE ROUTE - Works on both Android and iOS
         document.querySelectorAll('.live-route-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1134,11 +1133,24 @@
                 if (!destination) return;
 
                 const originalText = this.innerHTML;
-                this.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Finding You...';
+                this.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading Route...';
 
-                // Detect iOS (iPhone/iPad)
                 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
-                              (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+                             (navigator.platform === 'MacIntel' && 'ontouchend' in document);
+
+                const encodedDest = encodeURIComponent(destination);
+
+                const openMap = (url) => {
+                    if (isIOS) {
+                        window.location.href = url;
+                    } else {
+                        window.open(url, '_blank');
+                    }
+                    // Restore button text after a short delay
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                    }, 1500);
+                };
 
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(
@@ -1146,46 +1158,30 @@
                             const lat = position.coords.latitude;
                             const lng = position.coords.longitude;
 
-                            let mapsUrl;
                             if (isIOS) {
-                                // Apple Maps: saddr = start pin (You), daddr = destination pin
-                                mapsUrl = `http://maps.apple.com/?saddr=${lat},${lng}&daddr=${encodeURIComponent(destination)}&dirflg=w`;
+                                openMap(`maps://?saddr=Current%20Location&daddr=${encodedDest}&dirflg=w`);
                             } else {
-                                // Google Maps: origin = start pin (You), destination = destination pin
-                                mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${lat},${lng}&destination=${encodeURIComponent(destination)}&travelmode=walking`;
+                                const url = `https://www.google.com/maps/dir/?api=1&origin=${lat},${lng}&destination=${encodedDest}&travelmode=walking`;
+                                openMap(url);
                             }
-
-                            window.location.href = mapsUrl;
-                            this.innerHTML = originalText;
                         },
                         () => {
-                            // Fallback if location permission is denied: Just pin the destination
-                            let mapsUrl;
                             if (isIOS) {
-                                mapsUrl = `http://maps.apple.com/?daddr=${encodeURIComponent(destination)}&dirflg=w`;
+                                openMap(`maps://?daddr=${encodedDest}&dirflg=w`);
                             } else {
-                                mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}&travelmode=walking`;
+                                const url = `https://www.google.com/maps/dir/?api=1&destination=${encodedDest}&travelmode=walking`;
+                                openMap(url);
                             }
-
-                            window.location.href = mapsUrl;
-                            this.innerHTML = originalText;
                         },
-                        {
-                            enableHighAccuracy: true,
-                            timeout: 10000,
-                            maximumAge: 0
-                        }
+                        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
                     );
                 } else {
-                    // Fallback if geolocation is entirely unsupported by the browser
-                    let mapsUrl;
                     if (isIOS) {
-                        mapsUrl = `http://maps.apple.com/?daddr=${encodeURIComponent(destination)}&dirflg=w`;
+                        openMap(`maps://?daddr=${encodedDest}&dirflg=w`);
                     } else {
-                        mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}&travelmode=walking`;
+                        const url = `https://www.google.com/maps/dir/?api=1&destination=${encodedDest}&travelmode=walking`;
+                        openMap(url);
                     }
-                    window.location.href = mapsUrl;
-                    this.innerHTML = originalText;
                 }
             });
         });
